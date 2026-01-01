@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carwash Queue</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+
+    <h1>Carwash Queue</h1>
+    <div id="queueViewContainer">
+        <h2 id="liveQueue"></h2>
+    </div>
+
+    <form id="queueForm">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="text" id="plate" placeholder="Plate Number" required>
+        <input type="text" id="car" placeholder="Car Variant" required>
+        <button type="submit">Join Queue</button>
+    </form>
+
+    <h2 id="positionText"></h2>
+    <h3 id="statusText"></h3>
+
+    <script src="customer.js"></script>    
+</body>
+</html>
