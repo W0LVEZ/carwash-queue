@@ -1,15 +1,28 @@
+let customerQueue = [];
+
 document.getElementById("queueForm").addEventListener("submit", function (event) {
     event.preventDefault();
-    getFormValues();
-    
+    const formValues = getFormValues();
+    customerQueue.push(formValues);
+    const queuePosition = customerQueue.length;
+
+    document.getElementById("positionText").innerText = "You are " + queuePosition + " in line."
+    console.log(customerQueue);
+    console.log(queuePosition);
+
 });
 
-function getFormValues(event) {
+function getFormValues() {
     const nameInput = document.getElementById('name').value;
     const plateNumberInput = document.getElementById('plate').value;
     const carVariantInput = document.getElementById('car').value;
 
-    console.log(nameInput);
-    console.log(plateNumberInput);
-    console.log(carVariantInput);
+    const customers = {
+        name: nameInput,
+        plate: plateNumberInput,
+        car: carVariantInput
+    };
+    return customers;
 }
+
+
