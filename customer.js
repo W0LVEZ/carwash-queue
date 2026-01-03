@@ -3,12 +3,16 @@ let customerQueue = [];
 document.getElementById("queueForm").addEventListener("submit", function (event) {
     event.preventDefault();
     const formValues = getFormValues();
-    customerQueue.push(formValues);
-    const queuePosition = customerQueue.length;
-
-    document.getElementById("positionText").innerText = "You are " + queuePosition + " in line."
-    console.log(customerQueue);
-    console.log(queuePosition);
+    const duplicate = checkDuplicate(formValues);
+    let queuePosition; 
+    if (duplicate === -1) {
+        customerQueue.push(formValues);
+        queuePosition = customerQueue.length;
+    } else {
+        queuePosition = duplicate + 1;
+    }
+    
+    document.getElementById("positionText").innerText = "You are " + queuePosition + " in line.";
 
 });
 
@@ -25,4 +29,8 @@ function getFormValues() {
     return customers;
 }
 
-
+function checkDuplicate(formValues) {
+    const findPlateCar = customerQueue.findIndex(customer => 
+        customer.plate === formValues.plate && customer.car === formValues.car);
+    return findPlateCar;
+}
