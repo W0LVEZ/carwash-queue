@@ -1,86 +1,104 @@
-
+const maxSlot = 3;
 document.getElementById('done').addEventListener('click', ()=> {
     handleDoneClick();
     refreshUI();
-    renderWaitingQueue();
-    renderNowServing();
 });
 
 document.getElementById('nextCustomer').addEventListener('click', ()=> {
     handleNextClick();
-    refreshUI();
-    renderWaitingQueue();
-    renderNowServing();
-    
+    refreshUI();  
 });
+
+document.getElementById('skipCustomer').addEventListener('click', ()=> {
+    handleSkipClick();
+    refreshUI();
+})
 
 
 function handleNextClick() {
     let nowServing = getNowServing();
-    if(nowServing !== null) {
+    const waitQueue = getQueue(); 
+    if(nowServing.length >= maxSlot) {
         alert('Carwash slots are currrently full!');
         return;
-    } else {
-        const waitQueue = getQueue();  
-        if(waitQueue.length === 0) {
+    } 
+    if(waitQueue.length === 0) {
             return;
-        } else {
-            const firstCustomer = waitQueue.shift();
-            nowServingCustomer(firstCustomer);
-            saveQueue(waitQueue);
     }
-    }
+         
+        const nextCustomer = waitQueue.shift();
+        nowServing.push(nextCustomer);
+        nowServingCustomer(nowServing);
+        saveQueue(waitQueue);
+    
 }
 
 
 function handleDoneClick() {
     let nowServing = getNowServing();
-    if(nowServing !== null) {
-        nowServingCustomer(null);
-    }
-
-    const waitQueue = getQueue();   
-    if(waitQueue.length === 0) {
+    if(nowServing.length === 0) {
         return;
-    } else {
-        const firstCustomer = waitQueue.shift();
-        nowServingCustomer(firstCustomer);
-        saveQueue(waitQueue);
     }
+    nowServing.shift();
+    nowServingCustomer(nowServing);
 }
 
+
+function handleSkipClick() {
+    let waitQueue = getQueue();
+
+    if (waitQueue.length === 0) {
+        return;
+    } else {
+        waitQueue.shift();
+        saveQueue(waitQueue);
+    }
+
+}
 
 function renderWaitingQueue() {
     const customerQueue = getQueue();
     const waitQueue = document.getElementById('waitingQueue');
     waitQueue.textContent = '';
 
-    for (const customer of customerQueue) {
-        const newCustomer = document.createElement('div');
-
-        newCustomer.textContent = `Name: ${customer.name} | ${customer.plate} (${customer.car})`;
-        waitQueue.appendChild(newCustomer);
+   if (customerQueue.length === 0) {
+        waitQueue.textContent = 'No customers waiting';
+        return;
     }
+
+    customerQueue.forEach((customer, index) => {
+        const newCustomer = document.createElement('div');
+        newCustomer.textContent =
+            `${index + 1}. ${customer.name} — ${customer.plate} (${customer.car})`;
+        waitQueue.appendChild(newCustomer);
+    });
 }
 
 function renderNowServing() {
-    const nowServing = getNowServing();
-    const nowServingCustomers = document.getElementById('nowServing');
-    nowServingCustomers.textContent = '';
+        const nowServing = getNowServing();
+        const nowServingCustomers = document.getElementById('nowServing');
+        nowServingCustomers.textContent = '';
 
-    if (nowServing === null) {
-        let newNowServing = document.createElement('div');
-        newNowServing.textContent = 'No car being washed';
-        nowServingCustomers.appendChild(newNowServing);
-    } else {
-        let newNowServing = document.createElement('div');
-        newNowServing.textContent = `Name: ${nowServing.name} | 
-        Plate: ${nowServing.plate} | Car: ${nowServing.car}`;
-        nowServingCustomers.appendChild(newNowServing);
-    }
+        if (nowServing.length === 0) {
+            nowServingCustomers.textContent = 'No car to wash!'
+        }
+
+        nowServing.forEach((customer, index) => {
+        const nowServingElement = document.createElement('div');
+
+        nowServingElement.textContent =
+            `Slot ${index + 1}: ${customer.name} | ${customer.plate} (${customer.car})`;
+
+        nowServingCustomers.appendChild(nowServingElement);
+        });
+ 
 }
 
 function refreshUI() {
     renderWaitingQueue();
     renderNowServing();
 }
+
+document.addEventListener('DOMContentLoaded', ()=> {
+    refreshUI();
+})
