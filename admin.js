@@ -100,7 +100,8 @@ function refreshUI() {
 }
 
 window.addEventListener('storage', (event)=>{
-    if (event.key === 'customerQueue' || event.key === 'nowServing') {
+    if (event.key === 'currentCustomer' || event.key === 'nowServing' || 
+        event.key === 'queue' || event.key === 'customerQueue') {
         refreshUI();
     }
 })
