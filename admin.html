@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Carwash Queue</title>
+    <link rel="stylesheet" href="adminstyle.css">
 </head>
-<body>
+<body id="bodyAdmin">
+    <div id="headerContainer">
+        <img id="logoHeadAdmin" src="images/logo 2.png" alt="">
+    </div>
 
-    <h1>CarWash Queue - Admin</h1>
+    <h1 id="titleAdmin">Car Wash Queue - Admin</h1>
 
-    <div class="mainComponenets">
+    <div class="mainComponents">        
         <div id="nowServingArea">
             <h2>Now Serving</h2>
             <div id="nowServing"></div>
             <div id="controlButtons">
                 <button id="done">Done</button>
-                <button id="nextCustomer">Next Customer</button>
-                <button id="skipCustomer">Skip Customer</button>
+                <button id="nextCustomer">Next</button>
+                <button id="skipCustomer">Skip</button>
             </div>
         </div>
         <div id="waitingQueueArea">
