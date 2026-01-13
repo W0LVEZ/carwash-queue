@@ -99,6 +99,13 @@ function refreshUI() {
     renderNowServing();
 }
 
+window.addEventListener('storage', (event)=>{
+    if (event.key === 'customerQueue' || event.key === 'nowServing') {
+        refreshUI();
+    }
+})
+
 document.addEventListener('DOMContentLoaded', ()=> {
     refreshUI();
 })
+
