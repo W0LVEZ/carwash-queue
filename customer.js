@@ -109,9 +109,9 @@ function renderQueuePosition() {
 
     if (queueIndex !== -1) {
         positionText.innerText = `You are ${queueIndex + 1} in line.`;
-    } /* else {
+    } else {
         positionText.innerText = 'You are not in the queue.';
-    } */
+    } 
 
 }
 
