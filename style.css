@@ -1,0 +1,95 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: #fff9ef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    gap: 34px;
+}
+
+
+#logo{
+    height: 150px;
+    padding: 0;
+    margin: 0;
+}
+
+#logoHead{
+    min-width: 300px;
+    max-width: 740px;
+    margin: 10px 0;
+}
+
+h1{
+    margin: 0;
+    padding: 0;
+}
+
+#bodyContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 600px;
+    min-width: 320px;
+    box-shadow: 0 4px 8px 0 rgba(0, 3, 34, 0.2), 0 6px 20px 0 rgba(0, 3, 34, 0.19);
+    border-radius: 4px;
+    padding: 32px 16px;
+}
+
+#nowServing{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-variant-caps: petite-caps;
+    align-items: center;
+}
+
+#forms{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+#queueForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    max-width: 620px; 
+}
+
+input{
+    text-align: center;
+    border-radius: 8px;
+    padding: 4px;
+    font-size: large;
+    width: 160px;
+}
+
+::placeholder{
+    color: #181212;
+}
+
+button{
+    width: 200px;
+    height: 45px;
+    border-radius: 8px;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+#waitQueue{
+    font-variant-caps: petite-caps;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
