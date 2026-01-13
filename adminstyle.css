@@ -1,0 +1,81 @@
+#bodyAdmin{
+    margin: 0;
+    padding: 0;
+    background: #fff9ef;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#logoHeadAdmin{
+    min-width: 740px;
+    max-width: 900px;
+    margin: 10px 0;
+}
+
+#titleAdmin{
+    margin: 0;
+    padding-bottom: 24px;
+}
+
+.mainComponents{
+    display: flex;
+    align-items: baseline;
+    gap: 36px;
+}
+
+#nowServingArea{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-width: 400px;
+    max-width: 500px;
+    box-shadow: 0 4px 8px 0 rgba(0, 3, 34, 0.2), 0 6px 20px 0 rgba(0, 3, 34, 0.19);
+    border-radius: 8px;
+    padding: 32px 16px;
+}
+
+h2{
+    margin: 0;
+}
+
+#nowServing{
+    display: flex;
+    flex-direction: column;
+    font-variant-caps: petite-caps;
+}
+
+#controlButtons{
+    display: flex;
+    gap: 8px;
+}
+
+button{
+    width: 120px;
+    height: 30px;
+    font-size: large;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+#waitingQueueArea{
+    min-width: 400px;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 8px 0 rgba(0, 3, 34, 0.2), 0 6px 20px 0 rgba(0, 3, 34, 0.19);
+    border-radius: 8px;
+    padding: 32px 16px;
+}
+
+#waitingQueue{
+    font-variant-caps: petite-caps;
+    align-items: center;
+    justify-content: center;
+}
