@@ -3,19 +3,28 @@ document.getElementById("queueForm").addEventListener("submit", function (event)
 
     const customerQueue = getQueue();
     const formValues = getFormValues();
-    const duplicate = checkDuplicate(customerQueue, formValues);
 
-    //-1 not Found, 0 Found
-    if (duplicate === -1) {
-        customerQueue.push(formValues);
-        saveQueue(customerQueue);
-    } 
-    
     localStorage.setItem('currentCustomer',JSON.stringify({
         plate: formValues.plate,
         car: formValues.car
         })
     );
+
+    if (isCarInNowServing(formValues)) {
+        refreshUI();
+        return;
+    }
+
+    const duplicate = checkDuplicate(customerQueue, formValues);
+    //-1 not Found, 0 Found
+    if (duplicate !== -1) {
+        refreshUI();
+        return;
+    } 
+
+    customerQueue.push(formValues);
+    saveQueue(customerQueue);
+    
     refreshUI();
 });
 
@@ -42,26 +51,24 @@ function checkDuplicate(customerQueue, formValues) {
 function renderNowServing() {
     const nowServing = getNowServing();
     const nowServingCustomers = document.getElementById('nowServing');
-    nowServingCustomers.textContent = '';
+    nowServingCustomers.textContent = 'Now Serving:';
 
     if (nowServing.length === 0) {
         nowServingCustomers.textContent = 'No car to wash!'
-    }
-
+    } 
+    
     nowServing.forEach((customer, index) => {
-    const nowServingElement = document.createElement('div');
-
-    nowServingElement.textContent =
-        `Slot ${index + 1}: ${customer.plate} (${customer.car})`;
-
-    nowServingCustomers.appendChild(nowServingElement)
+        const nowServingElement = document.createElement('div');
+        nowServingElement.textContent =
+            `Slot ${index + 1}: ${customer.plate} (${customer.car})`;
+        nowServingCustomers.appendChild(nowServingElement)
     });
 }
 
 function renderWaitingQueue() {
     const customerQueue = getQueue();
     const waitQueue = document.getElementById('waitQueue');
-    waitQueue.textContent = '';
+    waitQueue.textContent = 'Wait Queue: ';
 
     if (customerQueue.length === 0) {
         waitQueue.textContent = 'No customer in line.';
@@ -90,7 +97,7 @@ function renderQueuePosition() {
     );
 
     if (servingIndex !== -1) {
-        positionText.innerText = 'Your car is now being washed 🚗💦';
+        positionText.innerText = 'Your car is now being washed';
         return;
     }
 
@@ -102,10 +109,18 @@ function renderQueuePosition() {
 
     if (queueIndex !== -1) {
         positionText.innerText = `You are ${queueIndex + 1} in line.`;
-    } else {
+    } /* else {
         positionText.innerText = 'You are not in the queue.';
-    }
+    } */
 
+}
+
+function isCarInNowServing(formValues) {
+    const nowServing = getNowServing();
+    return nowServing.some(customer => 
+        customer.plate === formValues.plate &&
+        customer.car === formValues.car
+    );
 }
 
 function refreshUI() {
@@ -115,7 +130,9 @@ function refreshUI() {
 }
 
 window.addEventListener('storage', (event)=>{
-    if (event.key === 'customerStorage' || event.key === 'nowServing') {
+    if (event.key === 'currentCustomer' || event.key === 'nowServing' || 
+        event.key === 'queue' || event.key === 'customerQueue'
+    ) {
         refreshUI();
         renderQueuePosition();
     }  
